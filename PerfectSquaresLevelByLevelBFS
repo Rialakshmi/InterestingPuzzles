@@ -1,0 +1,41 @@
+class Solution {
+    public int numSquares(int n) {
+        Queue<Integer> queue=new LinkedList<>();
+        int level=0;
+        List<Integer> list=new ArrayList<>();
+        
+        for(int i=1;i*i<=n;i++) {
+            list.add(i*i);
+        }
+        queue.offer(n);
+        
+        while(!queue.isEmpty()) {
+          level++;
+          
+          Queue<Integer> newQueue=new LinkedList<>();
+          while(!queue.isEmpty()) {
+              
+              int remainder=queue.poll();
+              
+              for(int i=0;i<list.size();i++) {
+                  
+                  int curr=list.get(i);
+                  if(curr==remainder)
+                      return level;
+                  else if(curr>remainder)
+                      break;
+                  else {
+                      
+                      newQueue.offer(remainder-curr);
+                  }
+                  
+              }
+              
+          }
+        queue=newQueue;
+            
+        }
+        
+        return -1;
+    }
+}
