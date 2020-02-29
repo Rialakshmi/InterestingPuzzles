@@ -1,0 +1,20 @@
+class Solution {
+    public int numSquares(int n) {
+        int[] memoi=new int[n+1];
+        Arrays.fill(memoi,-1);
+        memoi[0]=0;
+       return numSquares(n,0,n);
+    }
+    
+    public int numSquares(int target,int count,int n) {
+        if(target==0)
+            return count;
+        int curr=Integer.MAX_VALUE;
+        for(int i=1;i*i<=n;i++) {
+            if(target-i*i>=0)
+            curr = Math.min(curr,numSquares(target-i*i,1+count,n));
+        }
+        
+        return curr;
+    }
+}
