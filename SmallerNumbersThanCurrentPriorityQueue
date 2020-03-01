@@ -1,0 +1,36 @@
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<nums.length;i++) {
+            hm.put(i,nums[i]);
+        }
+        
+        Comparator<Map.Entry<Integer,Integer>> c=(a,b) -> (a.getValue()-b.getValue());
+        PriorityQueue<Map.Entry<Integer,Integer>> pq=new PriorityQueue<>(c);
+        
+        for(Map.Entry e:hm.entrySet()) {
+            
+            pq.offer(e);
+            
+        }
+        
+        int[] res=new int[nums.length];
+        int index=0;
+        int prev=Integer.MAX_VALUE;
+        int same=0;
+        while(!pq.isEmpty()) {
+            Map.Entry e=pq.poll();
+            if(prev==(int)e.getValue())
+                same++;
+            else
+                same=0;
+            res[(int)e.getKey()] = index - same;
+            
+            index++;
+            prev=(int)e.getValue();
+        }
+        
+        return res;
+    }
+}
