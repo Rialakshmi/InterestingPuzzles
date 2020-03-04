@@ -1,0 +1,27 @@
+class Solution {
+    public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
+        int i1=0,i2=0;
+        HashSet<Integer> hs=new HashSet<>();
+        List<Integer> res=new ArrayList<>();
+        while(i1<arr1.length&&i2<arr2.length) {
+            if(arr1[i1]<arr2[i2]) 
+                i1++;
+            else if(arr1[i1]>arr2[i2])
+                i2++;
+            else {
+                hs.add(arr1[i1]);
+                i1++;
+                i2++;
+            }
+            
+        }
+        
+        for(int num:arr3) {
+            if(hs.contains(num))
+                res.add(num);
+        }
+        
+        return res;
+        
+    }
+}
