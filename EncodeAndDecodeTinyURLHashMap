@@ -1,0 +1,26 @@
+public class Codec {
+    HashMap<Integer,String> hm=new HashMap<>();
+    String tiny="http:tinyurl.com/";
+    // Encodes a URL to a shortened URL.
+    public String encode(String longUrl) {
+        int hash=longUrl.hashCode();
+        hm.put(hash,longUrl);
+        return tiny+String.valueOf(hash);
+        
+    }
+
+    // Decodes a shortened URL to its original URL.
+    public String decode(String shortUrl) {
+      shortUrl=shortUrl.replace(tiny,"");
+      try{
+          return hm.get(Integer.parseInt(shortUrl));
+      }catch(NumberFormatException e) {
+          return null;
+      }
+      
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.decode(codec.encode(url));
