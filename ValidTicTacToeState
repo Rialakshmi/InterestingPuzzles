@@ -1,0 +1,83 @@
+class Solution {
+    public boolean validTicTacToe(String[] s) {
+        char[][] board=new char[3][3];
+        int totalXCount=0;int totalOCount=0;
+        for(int i=0;i<3;i++) {
+            int j=0;
+            while(j<3) {
+                board[i][j]=s[i].charAt(j);
+                if(board[i][j]=='X')
+                    totalXCount++;
+                else if(board[i][j]=='O')
+                    totalOCount++;
+                j++;     
+            }
+        } 
+        if(totalXCount-1>totalOCount||totalOCount>totalXCount)
+            return false;
+        //Winning in row
+        boolean won=false;
+        for(int i=0;i<3;i++) {
+            int j=0;
+            int xCount=0;
+            int oCount=0;
+            while(j<3) {
+                if(board[i][j]=='X')
+                    xCount++;
+                else if(board[i][j]=='Y')
+                    oCount++;
+                j++;
+            }
+            if(xCount==3 || oCount==3)
+                won=true;
+            if((xCount==3&&won)||(oCount==3&&won))
+                return false;     
+        }
+        for(int j=0;j<3;j++) {
+            int i=0;
+            int xCount=0;
+            int oCount=0;
+            while(i<3) {
+                if(board[i][j]=='X')
+                    xCount++;
+                else if(board[i][j]=='Y')
+                    oCount++;
+                i++;
+            }
+            if(xCount==3 || oCount==3)
+                won=true;
+            if((xCount==3&&won)||(oCount==3&&won))
+                return false;     
+        }
+         for(int i=2;i>=0;i--) {
+            int j=0;
+            int xCount=0;
+            int oCount=0;
+            while(j<3) {
+                if(board[i][j]=='X')
+                    xCount++;
+                else if(board[i][j]=='Y')
+                    oCount++;
+                j++;
+            }
+            if(xCount==3 || oCount==3)
+                won=true;
+            if((xCount==3&&won)||(oCount==3&&won))
+                return false;     
+        }
+        int xCount=0;
+        int oCount=0;
+        for(int i=0;i<3;i++) {
+            if(board[i][i]=='X')
+                    xCount++;
+                else if(board[i][i]=='Y')
+                    oCount++;
+        }
+         if((xCount==3&&won)||(oCount==3&&won))
+                return false; 
+        
+        return true;
+        
+        
+    }
+}
