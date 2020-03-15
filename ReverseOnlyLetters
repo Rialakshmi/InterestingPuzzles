@@ -1,0 +1,22 @@
+class Solution {
+    public String reverseOnlyLetters(String S) {
+        Stack<Character> stack=new Stack();
+        
+        for(char c:S.toCharArray()) {
+            if((c>='a'&&c<='z')||(c>='A'&&c<='Z'))
+            stack.push(c);
+        }
+        
+        StringBuffer sb=new StringBuffer();
+        
+        for(char c:S.toCharArray()) {
+            if((c>='a'&&c<='z')||(c>='A'&&c<='Z'))
+            sb.append(stack.pop());
+            else
+            sb.append(c);
+        }
+        
+        return sb.toString();
+        
+    }
+}
