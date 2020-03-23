@@ -10,42 +10,44 @@ class Solution {
     public ListNode sortList(ListNode head) {
         if(head==null || head.next == null)
             return head;
-        ListNode temp=null;
+        ListNode temp=head;
         ListNode slow=head;
         ListNode fast=head;
         
-        while(fast!=null&&fast.next!=null) {
+        while(fast!=null && fast.next !=null) {
             temp=slow;
             slow=slow.next;
-            fast.next=fast.next.next;
+            fast=fast.next.next;
         }
         temp.next=null;
-        ListNode leftList=sortList(head);
-        ListNode rightList=sortList(slow);
+        ListNode left=sortList(head);
+        ListNode right=sortList(slow);
         
-        return mergeList(leftList,rightList);
+        return mergeList(left,right);
+        
     }
     
-    ListNode mergeList(ListNode left,ListNode right) {
+    public ListNode mergeList(ListNode left,ListNode right) {
         
-        ListNode sortedHead = new ListNode(0);
-        ListNode trav=sortedHead;
-        while(left!=null&&right!=null) {
+        ListNode dummyHead=new ListNode(0);
+        ListNode curr=dummyHead;
+        
+        while(left!=null && right!=null ) {
+            
             if(left.val<right.val) {
-                trav.next=left;
+                curr.next=left;
                 left=left.next;
             }else {
-                trav.next=right;
+                curr.next=right;
                 right=right.next;
             }
-            trav=trav.next;
+            curr=curr.next;
         }
-        if(left!=null) {
-            trav.next=left;
-        }
-        if(right!=null) {
-            trav.next=right;
-        }
-        return sortedHead.next;
+        
+        if(left!=null) 
+            curr.next=left;
+        if(right!=null)
+            curr.next=right;
+        return dummyHead.next;
     }
 }
