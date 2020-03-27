@@ -1,0 +1,44 @@
+class Solution {
+    public String validIPAddress(String IP) {
+       int countofDot=count(IP,'.');
+        if(countofDot==3)
+            return ipv4(IP.split("\\.",-1));
+        int countofColon=count(IP,':');
+        if(countofColon==7)
+            return ipv6(IP.split(":",-1));
+        return "Neither";
+    }
+    int count(String s,char c) {
+        int count=0;
+        for(char curr:s.toCharArray()) {
+            if(curr==c)
+                count++;
+        }
+        
+        return count;
+    }
+    public String ipv4(String[] ips) {
+          for(String ip:ips) {
+                try {
+                    int num=Integer.parseInt(ip);
+              
+                if(num<0 || num>255 || !Integer.valueOf(num).equals(ip))
+                    return "Neither";
+                } catch(NumberFormatException e) {
+                    return "Neither";
+                }
+                
+            }
+            return "IPv4";
+    }
+    public String ipv6(String[] ips) {
+           
+            for(String ip:ips) {
+                if(ip.length()==0 || ip.length()>4 || ip.equals("-1"))
+                    return "Neither";
+                
+            }
+            return "IPv6";
+           
+    }
+}
