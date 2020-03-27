@@ -1,0 +1,36 @@
+class Solution {
+    public int compareVersion(String version1, String version2) {
+        String[] v1=version1.split("\\.");
+        List<String> vs1=new ArrayList<>(Arrays.asList(version1.split("\\.")));
+        List<String> vs2=new ArrayList<>(Arrays.asList(version2.split("\\.")));
+        if(vs1.size()<vs2.size())
+            fill(vs2,vs1);
+        else if(vs1.size()>vs2.size())
+            fill(vs1,vs2);
+        int index=0;
+        if(vs1.size()==vs2.size()) {
+            while(index<vs1.size()) {
+               int num1=Integer.valueOf(vs1.get(index));
+               int num2=Integer.valueOf(vs2.get(index));
+                if(num1>num2)
+                    return 1;
+                else if(num2>num1)
+                    return -1;
+               index++;
+            }
+            
+        }
+        
+        return 0;
+        
+    }
+    
+    public void fill(List<String> vs1,List<String> vs2) {
+
+        int diff=vs1.size()-vs2.size();
+        while(diff>0) {
+            diff--;
+            vs2.add("0");
+        }
+    }
+}
