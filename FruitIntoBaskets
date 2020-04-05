@@ -1,0 +1,26 @@
+class Solution {
+    public int totalFruit(int[] tree) {
+        int maxFruits=Integer.MIN_VALUE;
+        int startWindow=0;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int endWindow=0;endWindow<tree.length;endWindow++) {
+            hm.put(tree[endWindow],hm.getOrDefault(tree[endWindow],0)+1);
+            while(hm.size()>2) {
+                int leftCount=hm.get(tree[startWindow]);
+                if(leftCount==1)
+                    hm.remove(tree[startWindow]);
+                else
+                    hm.put(tree[startWindow],hm.get(tree[startWindow])-1);
+                startWindow++;
+            }
+            
+            int curr=0;
+            for(Map.Entry e:hm.entrySet()) {
+                curr += (int)e.getValue();
+            }
+            maxFruits=Math.max(maxFruits,curr);
+        }
+        
+        return maxFruits;
+    }
+}
